@@ -1,18 +1,18 @@
 package dj.core;
 
-@SuppressWarnings("WeakerAccess")
-public abstract class AbstractEdge<NodeSelf extends Node<NodeSelf>> implements Edge<NodeSelf> {
-    private Node<NodeSelf> startNode;
-    private Node<NodeSelf> endNode;
+public abstract class AbstractEdge<N extends Node<N, E>, E extends Edge<N, E>>
+        implements Edge<N, E> {
+    private Node<N, E> startNode;
+    private Node<N, E> endNode;
     private String label;
 
-    public AbstractEdge(NodeSelf startNode, NodeSelf endNode, String label) {
+    public AbstractEdge(N startNode, N endNode, String label) {
         this.startNode = startNode;
         this.endNode = endNode;
         this.label = label;
     }
 
-    public AbstractEdge(NodeSelf startNode, NodeSelf endNode) {
+    public AbstractEdge(N startNode, N endNode) {
         this(startNode, endNode, "");
     }
 
@@ -25,22 +25,22 @@ public abstract class AbstractEdge<NodeSelf extends Node<NodeSelf>> implements E
     }
 
     @Override
-    public Node<NodeSelf> getStartNode() {
+    public Node<N, E> getStartNode() {
         return startNode;
     }
 
     @Override
-    public void setStartNode(Node<NodeSelf> node) throws UnsupportedOperationException {
+    public void setStartNode(Node<N, E> node) throws UnsupportedOperationException {
         startNode = node;
     }
 
     @Override
-    public Node<NodeSelf> getEndNode() {
+    public Node<N, E> getEndNode() {
         return endNode;
     }
 
     @Override
-    public void setEndNode(Node<NodeSelf> node) throws UnsupportedOperationException {
+    public void setEndNode(Node<N, E> node) throws UnsupportedOperationException {
         endNode = node;
     }
 

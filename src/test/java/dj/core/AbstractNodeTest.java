@@ -10,8 +10,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 class AbstractNodeTest {
-    private List<Edge<TestNode>> incomingEdges = Collections.singletonList(new TestEdge());
-    private List<Edge<TestNode>> outgoingEdges = Collections.singletonList(new TestEdge());
+    private List<TestEdge> incomingEdges = Collections.singletonList(new TestEdge());
+    private List<TestEdge> outgoingEdges = Collections.singletonList(new TestEdge());
 
     @Test
     void getIncomingEdges_ReturnsEmptyList_WhenDefaultConstructed() {

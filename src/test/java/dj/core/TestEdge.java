@@ -1,6 +1,6 @@
 package dj.core;
 
-class TestEdge extends AbstractEdge<TestNode> {
+class TestEdge extends AbstractEdge<TestNode, TestEdge> {
     TestEdge(TestNode startNode, TestNode endNode) {
         super(startNode, endNode);
     }

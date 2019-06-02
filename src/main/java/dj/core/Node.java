@@ -2,8 +2,8 @@ package dj.core;
 
 import java.util.List;
 
-public interface Node<Self extends Node<Self>> extends LabeledItem {
-    List<Edge<Self>> getIncomingEdges();
+public interface Node<N extends Node<N, E>, E extends Edge<N, E>> extends LabeledItem {
+    List<E> getIncomingEdges();
 
-    List<Edge<Self>> getOutgoingEdges();
+    List<E> getOutgoingEdges();
 }

@@ -3,24 +3,23 @@ package dj.core;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("WeakerAccess")
-public abstract class AbstractNode<Self extends AbstractNode<Self>> implements Node<Self> {
+public abstract class AbstractNode<N extends AbstractNode<N, E>, E extends Edge<N, E>>
+        implements Node<N, E> {
 
-    private List<Edge<Self>> incomingEdges;
-    private List<Edge<Self>> outgoingEdges;
+    private List<E> incomingEdges;
+    private List<E> outgoingEdges;
     private String label;
 
-    public AbstractNode(List<Edge<Self>> incomingEdges, List<Edge<Self>> outgoingEdges,
-                        String label) {
+    public AbstractNode(List<E> incomingEdges, List<E> outgoingEdges, String label) {
         this.incomingEdges = incomingEdges;
         this.outgoingEdges = outgoingEdges;
         this.label = label;
 
         try {
-            for (Edge<Self> edge : incomingEdges) {
+            for (E edge : incomingEdges) {
                 edge.setEndNode(this);
             }
-            for (Edge<Self> edge : outgoingEdges) {
+            for (E edge : outgoingEdges) {
                 edge.setStartNode(this);
             }
         } catch (UnsupportedOperationException ex) {
@@ -29,7 +28,7 @@ public abstract class AbstractNode<Self extends AbstractNode<Self>> implements N
         }
     }
 
-    public AbstractNode(List<Edge<Self>> incomingEdges, List<Edge<Self>> outgoingEdges) {
+    public AbstractNode(List<E> incomingEdges, List<E> outgoingEdges) {
 
         this(incomingEdges, outgoingEdges, "");
     }
@@ -43,12 +42,12 @@ public abstract class AbstractNode<Self extends AbstractNode<Self>> implements N
     }
 
     @Override
-    public List<Edge<Self>> getIncomingEdges() {
+    public List<E> getIncomingEdges() {
         return incomingEdges;
     }
 
     @Override
-    public List<Edge<Self>> getOutgoingEdges() {
+    public List<E> getOutgoingEdges() {
         return outgoingEdges;
     }
 
