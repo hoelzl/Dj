@@ -8,6 +8,7 @@ repositories {
 }
 
 dependencies {
+    compile("org.beryx:text-io:3.2.0")
     testCompile("org.junit.jupiter:junit-jupiter-api:5.4.2")
     testCompile("org.junit.jupiter:junit-jupiter-params:5.4.2")
     testImplementation("org.hamcrest:hamcrest-library:2.1")

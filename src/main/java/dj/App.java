@@ -3,12 +3,24 @@
  */
 package dj;
 
+import org.beryx.textio.TextIO;
+import org.beryx.textio.TextIoFactory;
+import org.beryx.textio.TextTerminal;
+
 public class App {
-    public String getGreeting() {
-        return "Hello world.";
+    public static void main(String[] args) {
+        App app = new App();
+
+        TextIO textIO = TextIoFactory.getTextIO();
+        String name = textIO.newStringInputReader()
+                .withDefaultValue(app.getDefaultName())
+                .read("Username");
+
+        TextTerminal terminal = textIO.getTextTerminal();
+        terminal.printf("\nHello, %s!\n", name);
     }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    public String getDefaultName() {
+        return "world";
     }
 }
