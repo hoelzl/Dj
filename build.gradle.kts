@@ -21,7 +21,12 @@ tasks.test {
 	}
 }
 
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "dj.App"
+    }
+}
+
 application {
-    // Define the main class for the application
     mainClassName = "dj.App"
 }
