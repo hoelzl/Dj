@@ -14,6 +14,11 @@ dependencies {
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.2")
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_12
+    targetCompatibility = JavaVersion.VERSION_12
+}
+
 tasks.test {
 	useJUnitPlatform()
 	testLogging {
