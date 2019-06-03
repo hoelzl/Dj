@@ -8,31 +8,31 @@ import java.util.List;
 public class DialogText extends AbstractNode<DialogText, DialogChoice>
         implements DialogActivity, ValuedItem<String> {
 
-    private DialogManager dialogManager;
+    private DialogInstance dialogInstance;
     private String value;
 
-    public DialogText(DialogManager dialogManager, String label, String value,
+    public DialogText(DialogInstance dialogInstance, String label, String value,
                       List<DialogChoice> incomingEdges, List<DialogChoice> outgoingEdges) {
         super(incomingEdges, outgoingEdges, label);
-        this.dialogManager = dialogManager;
+        this.dialogInstance = dialogInstance;
         this.value = value;
     }
 
-    public DialogText(DialogManager dialogManager, String label, List<DialogChoice> incomingEdges,
+    public DialogText(DialogInstance dialogInstance, String label, List<DialogChoice> incomingEdges,
                       List<DialogChoice> outgoingEdges) {
         super(incomingEdges, outgoingEdges, label);
-        this.dialogManager = dialogManager;
+        this.dialogInstance = dialogInstance;
     }
 
-    public DialogText(DialogManager dialogManager, String label, String value) {
+    public DialogText(DialogInstance dialogInstance, String label, String value) {
         super(label);
-        this.dialogManager = dialogManager;
+        this.dialogInstance = dialogInstance;
         this.value = value;
     }
 
-    public DialogText(DialogManager dialogManager, String label) {
+    public DialogText(DialogInstance dialogInstance, String label) {
         super(label);
-        this.dialogManager = dialogManager;
+        this.dialogInstance = dialogInstance;
     }
 
     public List<DialogChoice> getChoices() {
@@ -54,7 +54,7 @@ public class DialogText extends AbstractNode<DialogText, DialogChoice>
 
     @Override
     public void activate() {
-        dialogManager.proposeChoices(getOutgoingEdges());
+        dialogInstance.proposeChoices(getOutgoingEdges());
     }
 
     @Override

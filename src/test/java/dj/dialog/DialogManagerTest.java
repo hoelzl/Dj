@@ -12,9 +12,11 @@ class DialogManagerTest {
     private DialogObserverSpy spy1;
     private DialogObserverSpy spy2;
     private DialogManager unit;
+    private DialogInstance dialogInstance;
 
     DialogManagerTest() {
         unit = new DialogManager();
+        dialogInstance = new DialogInstance(unit);
         spy1 = new DialogObserverSpy();
         spy2 = new DialogObserverSpy();
 
@@ -24,8 +26,8 @@ class DialogManagerTest {
 
     @Test
     void proposeChoices_notifiesAllObservers() {
-        DialogChoice choice1 = new DialogChoice(unit, "choice1");
-        DialogChoice choice2 = new DialogChoice(unit, "choice2");
+        DialogChoice choice1 = new DialogChoice(dialogInstance, "choice1");
+        DialogChoice choice2 = new DialogChoice(dialogInstance, "choice2");
         List<DialogChoice> choices = Arrays.asList(choice1, choice2);
 
         unit.proposeChoices(choices);
@@ -36,7 +38,7 @@ class DialogManagerTest {
 
     @Test
     void selectChoice_notifiesAllObservers() {
-        DialogChoice choice = new DialogChoice(unit, "choice1");
+        DialogChoice choice = new DialogChoice(dialogInstance, "choice1");
 
         unit.selectChoice(choice);
 

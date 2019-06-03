@@ -11,20 +11,17 @@ import java.util.List;
 public class DialogChoice extends AbstractEdge<DialogText, DialogChoice>
         implements DialogActivity, ValuedItem<String>, CommandProvider {
 
-    public DialogChoice(DialogManager dialogManager, String label, DialogText startNode,
+    private DialogInstance dialogInstance;
+
+    public DialogChoice(DialogInstance dialogInstance, String label, DialogText startNode,
                         DialogText endNode) {
         super(startNode, endNode, label);
-        this.dialogManager = dialogManager;
+        this.dialogInstance = dialogInstance;
     }
 
-    public DialogChoice(DialogManager dialogManager, String label) {
+    public DialogChoice(DialogInstance dialogInstance, String label) {
         super(label);
-        this.dialogManager = dialogManager;
-    }
-
-    @Override
-    public void activate() {
-        dialogManager.selectChoice(this);
+        this.dialogInstance = dialogInstance;
     }
 
     @Override
@@ -38,7 +35,11 @@ public class DialogChoice extends AbstractEdge<DialogText, DialogChoice>
     }
 
     private String value;
-    private DialogManager dialogManager;
+
+    @Override
+    public void activate() {
+        dialogInstance.selectChoice(this);
+    }
 
     @Override
     public List<Command> provideCommands() {
