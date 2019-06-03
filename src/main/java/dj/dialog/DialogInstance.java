@@ -4,9 +4,6 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class DialogInstance implements DialogActivity {
-    private DialogManager dialogManager;
-    private DialogText initialText;
-
     public DialogInstance(DialogManager dialogManager) {
         this.dialogManager = dialogManager;
     }
@@ -42,4 +39,7 @@ public class DialogInstance implements DialogActivity {
     void selectChoice(DialogChoice choice) {
         dialogManager.selectChoice(choice);
     }
+
+    private DialogManager dialogManager;
+    private DialogText initialText;
 }

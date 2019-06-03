@@ -14,10 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class App {
-    private TextTerminal terminal;
-    private CommandSelector cs = new TextCommandSelector();
-    private List<Command> commands = new ArrayList<>();
-
     App() {
         TextIO textIO = TextIoFactory.getTextIO();
         terminal = textIO.getTextTerminal();
@@ -60,4 +56,8 @@ public class App {
     public String getDefaultName() {
         return "world";
     }
+
+    private TextTerminal terminal;
+    private CommandSelector cs = new TextCommandSelector();
+    private List<Command> commands = new ArrayList<>();
 }

@@ -7,10 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandProcessor {
-    private List<Command> commands = new ArrayList<>();
-    private List<CommandProvider> commandProviders = new ArrayList<>();
-    private List<CommandObserver> observers = new ArrayList<>();
-
     public void updateAndProcessCommands() {
         updateCommands();
         notifyObservers();
@@ -40,4 +36,8 @@ public class CommandProcessor {
     public void clearCommandProviders() {
         commandProviders.clear();
     }
+
+    private List<Command> commands = new ArrayList<>();
+    private List<CommandProvider> commandProviders = new ArrayList<>();
+    private List<CommandObserver> observers = new ArrayList<>();
 }

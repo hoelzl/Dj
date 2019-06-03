@@ -8,23 +8,23 @@ import java.util.List;
 public class DialogText extends AbstractNode<DialogText, DialogChoice>
         implements DialogActivity, ValuedItem<String> {
 
-    private DialogInstance dialogInstance;
-    private String value;
-
     public DialogText(DialogInstance dialogInstance, String label, String value,
-                      List<DialogChoice> incomingEdges, List<DialogChoice> outgoingEdges) {
+                      List<DialogChoice> incomingEdges,
+                      List<DialogChoice> outgoingEdges) {
         super(incomingEdges, outgoingEdges, label);
         this.dialogInstance = dialogInstance;
         this.value = value;
     }
 
-    public DialogText(DialogInstance dialogInstance, String label, List<DialogChoice> incomingEdges,
+    public DialogText(DialogInstance dialogInstance, String label,
+                      List<DialogChoice> incomingEdges,
                       List<DialogChoice> outgoingEdges) {
         super(incomingEdges, outgoingEdges, label);
         this.dialogInstance = dialogInstance;
     }
 
-    public DialogText(DialogInstance dialogInstance, String label, String value) {
+    public DialogText(DialogInstance dialogInstance, String label,
+                      String value) {
         super(label);
         this.dialogInstance = dialogInstance;
         this.value = value;
@@ -44,7 +44,8 @@ public class DialogText extends AbstractNode<DialogText, DialogChoice>
         if (choice.getStartNode() == null) {
             choice.setStartNode(this);
         } else if (choice.getStartNode() != this) {
-            throw new IllegalArgumentException("Choice already belongs to different text");
+            throw new IllegalArgumentException(
+                    "Choice already belongs to different text");
         }
         var choices = getChoices();
         if (!choices.contains(choice)) {
@@ -66,4 +67,7 @@ public class DialogText extends AbstractNode<DialogText, DialogChoice>
     public void setValue(String newValue) throws UnsupportedOperationException {
         value = newValue;
     }
+
+    private DialogInstance dialogInstance;
+    private String value;
 }

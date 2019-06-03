@@ -7,14 +7,12 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DialogTextTest {
-    private DialogManagerSpy dialogManager = new DialogManagerSpy();
-    private DialogInstance dialogInstance = new DialogInstance(dialogManager);
-
     @Test
     void addChoice_whenNewChoiceIsNotPresentAndValid_AddsNewChoiceToChoices() {
         DialogText unit = new DialogText(dialogInstance, "unit");
         DialogChoice choice1 = new DialogChoice(dialogInstance, "choice1");
-        DialogChoice choice2 = new DialogChoice(dialogInstance, "choice2", unit, null);
+        DialogChoice choice2 =
+                new DialogChoice(dialogInstance, "choice2", unit, null);
         unit.addChoice(choice1);
         unit.addChoice(choice2);
 
@@ -28,9 +26,11 @@ class DialogTextTest {
     void addChoice_throwsWhenChoiceHasOtherStartNode() {
         DialogText unit = new DialogText(dialogInstance, "unit");
         DialogText otherText = new DialogText(dialogInstance, "other");
-        DialogChoice choice = new DialogChoice(dialogInstance, "choice", otherText, null);
+        DialogChoice choice =
+                new DialogChoice(dialogInstance, "choice", otherText, null);
 
-        assertThrows(IllegalArgumentException.class, () -> unit.addChoice(choice));
+        assertThrows(IllegalArgumentException.class,
+                () -> unit.addChoice(choice));
     }
 
     @Test
@@ -63,5 +63,8 @@ class DialogTextTest {
 
         assertThat(unit.getValue(), is("new value"));
     }
+
+    private DialogManagerSpy dialogManager = new DialogManagerSpy();
+    private DialogInstance dialogInstance = new DialogInstance(dialogManager);
 
 }

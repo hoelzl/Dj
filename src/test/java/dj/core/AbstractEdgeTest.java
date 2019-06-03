@@ -7,9 +7,6 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 class AbstractEdgeTest {
-    private TestNode startNode = new TestNode();
-    private TestNode endNode = new TestNode();
-
     @Test
     void getStartNode_WhenEdgeHasValidStartAndEndNode() {
         TestEdge unit = new TestEdge(startNode, endNode);
@@ -80,4 +77,7 @@ class AbstractEdgeTest {
         final String aRandomValue = "Foo";
         assertThat(new TestEdge().isEnabledFor(aRandomValue), is(true));
     }
+
+    private TestNode startNode = new TestNode();
+    private TestNode endNode = new TestNode();
 }

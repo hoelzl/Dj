@@ -4,8 +4,6 @@ import dj.core.Command;
 
 @SuppressWarnings("WeakerAccess")
 public class SelectDialogChoiceCommand implements Command {
-    private DialogChoice choice;
-
     public SelectDialogChoiceCommand(DialogChoice activity) {
         this.choice = activity;
     }
@@ -19,4 +17,6 @@ public class SelectDialogChoiceCommand implements Command {
     public String describe() {
         return choice.getLabel();
     }
+
+    private DialogChoice choice;
 }

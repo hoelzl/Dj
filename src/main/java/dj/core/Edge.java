@@ -1,15 +1,18 @@
 package dj.core;
 
-public interface Edge<N extends Node<N, E>, E extends Edge<N, E>> extends LabeledItem {
+public interface Edge<N extends Node<N, E>, E extends Edge<N, E>>
+        extends LabeledItem {
     Node<N, E> getStartNode();
 
-    default void setStartNode(Node<N, E> node) throws UnsupportedOperationException {
+    default void setStartNode(Node<N, E> node)
+            throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     Node<N, E> getEndNode();
 
-    default void setEndNode(Node<N, E> node) throws UnsupportedOperationException {
+    default void setEndNode(Node<N, E> node)
+            throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 

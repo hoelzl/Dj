@@ -9,11 +9,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 class DialogManagerTest {
-    private DialogObserverSpy spy1;
-    private DialogObserverSpy spy2;
-    private DialogManager unit;
-    private DialogInstance dialogInstance;
-
     DialogManagerTest() {
         unit = new DialogManager();
         dialogInstance = new DialogInstance(unit);
@@ -45,4 +40,9 @@ class DialogManagerTest {
         assertThat(spy1.selectedChoice, is(choice));
         assertThat(spy2.selectedChoice, is(choice));
     }
+
+    private DialogObserverSpy spy1;
+    private DialogObserverSpy spy2;
+    private DialogManager unit;
+    private DialogInstance dialogInstance;
 }

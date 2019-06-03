@@ -11,10 +11,8 @@ import java.util.List;
 public class DialogChoice extends AbstractEdge<DialogText, DialogChoice>
         implements DialogActivity, ValuedItem<String>, CommandProvider {
 
-    private DialogInstance dialogInstance;
-
-    public DialogChoice(DialogInstance dialogInstance, String label, DialogText startNode,
-                        DialogText endNode) {
+    public DialogChoice(DialogInstance dialogInstance, String label,
+                        DialogText startNode, DialogText endNode) {
         super(startNode, endNode, label);
         this.dialogInstance = dialogInstance;
     }
@@ -34,8 +32,6 @@ public class DialogChoice extends AbstractEdge<DialogText, DialogChoice>
         value = newValue;
     }
 
-    private String value;
-
     @Override
     public void activate() {
         dialogInstance.selectChoice(this);
@@ -45,4 +41,7 @@ public class DialogChoice extends AbstractEdge<DialogText, DialogChoice>
     public List<Command> provideCommands() {
         return Collections.singletonList(new SelectDialogChoiceCommand(this));
     }
+
+    private DialogInstance dialogInstance;
+    private String value;
 }

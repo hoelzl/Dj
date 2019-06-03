@@ -2,10 +2,6 @@ package dj.core;
 
 public abstract class AbstractEdge<N extends Node<N, E>, E extends Edge<N, E>>
         implements Edge<N, E> {
-    private Node<N, E> startNode;
-    private Node<N, E> endNode;
-    private String label;
-
     public AbstractEdge(N startNode, N endNode, String label) {
         this.startNode = startNode;
         this.endNode = endNode;
@@ -30,7 +26,8 @@ public abstract class AbstractEdge<N extends Node<N, E>, E extends Edge<N, E>>
     }
 
     @Override
-    public void setStartNode(Node<N, E> node) throws UnsupportedOperationException {
+    public void setStartNode(Node<N, E> node)
+            throws UnsupportedOperationException {
         startNode = node;
     }
 
@@ -40,7 +37,8 @@ public abstract class AbstractEdge<N extends Node<N, E>, E extends Edge<N, E>>
     }
 
     @Override
-    public void setEndNode(Node<N, E> node) throws UnsupportedOperationException {
+    public void setEndNode(Node<N, E> node)
+            throws UnsupportedOperationException {
         endNode = node;
     }
 
@@ -48,4 +46,8 @@ public abstract class AbstractEdge<N extends Node<N, E>, E extends Edge<N, E>>
     public String getLabel() {
         return label;
     }
+
+    private Node<N, E> startNode;
+    private Node<N, E> endNode;
+    private String label;
 }

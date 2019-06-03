@@ -8,9 +8,6 @@ import org.beryx.textio.TextTerminal;
 
 @SuppressWarnings("WeakerAccess")
 public class TextTerminalPane implements TerminalPane {
-    private TextTerminal terminal;
-    private IntInputReader inputReader;
-
     public TextTerminalPane() {
         TextIO textIO = TextIoFactory.getTextIO();
         terminal = textIO.getTextTerminal();
@@ -26,4 +23,7 @@ public class TextTerminalPane implements TerminalPane {
     public int readInt(String prompt, int min, int max) {
         return inputReader.withMinVal(min).withMaxVal(max).read(prompt);
     }
+
+    private TextTerminal terminal;
+    private IntInputReader inputReader;
 }
