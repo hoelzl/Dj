@@ -45,7 +45,7 @@ public class App {
                 return "Second command";
             }
         });
-        commands.add(cs.exitCommand);
+        commands.add(cs.getExitCommand());
     }
 
     public static void main(String[] args) {
