@@ -1,13 +1,12 @@
 package dj.commandprocessor;
 
 import dj.core.Command;
-import dj.core.IOPane;
 
 import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 public class CommandSelector {
-    private IOPane ioPane;
+    private TerminalPane terminalPane;
     private boolean shouldExit = false;
 
     private Command exitCommand = new Command() {
@@ -22,8 +21,8 @@ public class CommandSelector {
         }
     };
 
-    public CommandSelector(IOPane ioPane) {
-        this.ioPane = ioPane;
+    public CommandSelector(TerminalPane terminalPane) {
+        this.terminalPane = terminalPane;
     }
 
     public Command getExitCommand() {
@@ -33,8 +32,6 @@ public class CommandSelector {
     public boolean promptForAndExecuteSingleCommand(List<Command> commands) {
         Command command = promptForCommand(commands);
         command.execute();
-        ioPane.println();
-
         return shouldExit;
     }
 
@@ -42,9 +39,9 @@ public class CommandSelector {
 
         for (int i = 0; i < commands.size(); i++) {
             Command c = commands.get(i);
-            ioPane.println("%d: %s\n", i + 1, c.describe());
+            terminalPane.displayChoice(i + 1, c.describe());
         }
-        int selectedCommand = ioPane.readInt("Select a command:", 1, commands.size());
+        int selectedCommand = terminalPane.readInt("Select a command:", 1, commands.size());
         return commands.get(selectedCommand - 1);
     }
 }

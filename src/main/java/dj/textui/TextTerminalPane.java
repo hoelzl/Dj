@@ -1,25 +1,25 @@
 package dj.textui;
 
-import dj.core.IOPane;
+import dj.commandprocessor.TerminalPane;
 import org.beryx.textio.IntInputReader;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 import org.beryx.textio.TextTerminal;
 
 @SuppressWarnings("WeakerAccess")
-public class TextIOPane implements IOPane {
+public class TextTerminalPane implements TerminalPane {
     private TextTerminal terminal;
     private IntInputReader inputReader;
 
-    public TextIOPane() {
+    public TextTerminalPane() {
         TextIO textIO = TextIoFactory.getTextIO();
         terminal = textIO.getTextTerminal();
         inputReader = textIO.newIntInputReader();
     }
 
     @Override
-    public void println(String format, Object... args) {
-        terminal.printf(format, args);
+    public void displayChoice(int choiceNumber, String choiceText) {
+        terminal.printf("%d: %s\n", choiceNumber, choiceText);
     }
 
     @Override

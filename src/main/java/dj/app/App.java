@@ -25,7 +25,7 @@ public class App {
         commands.add(new Command() {
             @Override
             public void execute() {
-                terminal.printf("Executing first command");
+                terminal.printf("Executing first command\n");
             }
 
             @Override
@@ -37,7 +37,7 @@ public class App {
         commands.add(new Command() {
             @Override
             public void execute() {
-                terminal.printf("Executing second command");
+                terminal.printf("Executing second command\n");
             }
 
             @Override
