@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DialogManager {
-    private List<DialogObserver> observers;
 
     public DialogManager() {
         observers = new ArrayList<>();
@@ -25,4 +24,6 @@ public class DialogManager {
             observer.onChoiceSelected(choice);
         }
     }
+
+    private List<DialogObserver> observers;
 }

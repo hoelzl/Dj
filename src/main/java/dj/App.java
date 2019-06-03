@@ -3,21 +3,55 @@
  */
 package dj;
 
+import dj.core.Command;
+import dj.textui.CommandSelector;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 import org.beryx.textio.TextTerminal;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
         App app = new App();
 
         TextIO textIO = TextIoFactory.getTextIO();
-        String name = textIO.newStringInputReader()
-                .withDefaultValue(app.getDefaultName())
-                .read("Username");
-
         TextTerminal terminal = textIO.getTextTerminal();
-        terminal.printf("\nHello, %s!\n", name);
+
+        List<Command> commands = new ArrayList<>();
+        commands.add(new Command() {
+
+            @Override
+            public void execute() {
+                terminal.printf("Executing first command");
+            }
+
+            @Override
+            public String describe() {
+                return "First command";
+            }
+        });
+        commands.add(new Command() {
+
+            @Override
+            public void execute() {
+                terminal.printf("Executing second command");
+            }
+
+            @Override
+            public String describe() {
+                return "Second command";
+            }
+        });
+
+        CommandSelector cs = new CommandSelector();
+        commands.add(cs.exitCommand);
+
+        //noinspection StatementWithEmptyBody
+        while (!cs.promptForAndExecuteSingleCommand(commands)) {
+        }
+        System.exit(0);
     }
 
     public String getDefaultName() {
