@@ -34,6 +34,7 @@ public class DialogChoice extends AbstractEdge<DialogText, DialogChoice>
 
     @Override
     public void activate() {
+        dialogInstance.display(this);
         dialogInstance.selectChoice(this);
     }
 

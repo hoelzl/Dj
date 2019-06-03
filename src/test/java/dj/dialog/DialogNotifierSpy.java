@@ -2,7 +2,7 @@ package dj.dialog;
 
 import java.util.List;
 
-class DialogManagerSpy extends DialogManager {
+class DialogNotifierSpy extends DialogNotifier {
     @Override
     void proposeChoices(List<DialogChoice> choices) {
         proposedChoices = choices;

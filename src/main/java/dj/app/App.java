@@ -5,6 +5,8 @@ package dj.app;
 
 import dj.commandprocessor.CommandSelector;
 import dj.core.Command;
+import dj.core.ValuedItem;
+import dj.dialog.*;
 import dj.textui.TextCommandSelector;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
@@ -18,37 +20,46 @@ public class App {
         TextIO textIO = TextIoFactory.getTextIO();
         terminal = textIO.getTextTerminal();
 
-        commands.add(new Command() {
+        DialogNotifier dialogNotifier = new DialogNotifier();
+        dialogNotifier.register(new DialogObserver() {
             @Override
-            public void execute() {
-                terminal.printf("Executing first command\n");
+            public void onDisplay(ValuedItem<String> item) {
+                String value = item.getValue();
+                if (value != null) {
+                    terminal.println(value);
+                }
             }
 
             @Override
-            public String describe() {
-                return "First command";
+            public void onChoicesProposed(List<DialogChoice> proposedChoices) {
+                List<Command> commands = new ArrayList<>();
+                for (var choice : proposedChoices) {
+                    commands.addAll(choice.provideCommands());
+                }
+                commands.add(commandSelector.getExitCommand());
+                commandSelector.promptForAndExecuteSingleCommand(commands);
             }
 
+            @Override
+            public void onChoiceSelected(DialogChoice choice) {
+            }
         });
-        commands.add(new Command() {
-            @Override
-            public void execute() {
-                terminal.printf("Executing second command\n");
-            }
+        dialogInstance = new DialogInstance(dialogNotifier);
 
-            @Override
-            public String describe() {
-                return "Second command";
-            }
-        });
-        commands.add(cs.getExitCommand());
+        DialogText initialText =
+                new DialogText(dialogInstance, "Start", "The initial text.");
+        dialogInstance.setInitialText(initialText);
+
+        commands.addAll(dialogInstance.provideCommands());
+        commands.add(commandSelector.getExitCommand());
     }
 
     public static void main(String[] args) {
         App app = new App();
 
         //noinspection StatementWithEmptyBody
-        while (!app.cs.promptForAndExecuteSingleCommand(app.commands)) {
+        while (!app.commandSelector.promptForAndExecuteSingleCommand(
+                app.commands)) {
         }
         System.exit(0);
     }
@@ -57,7 +68,8 @@ public class App {
         return "world";
     }
 
-    private TextTerminal terminal;
-    private CommandSelector cs = new TextCommandSelector();
+    private CommandSelector commandSelector = new TextCommandSelector();
     private List<Command> commands = new ArrayList<>();
+    private DialogInstance dialogInstance;
+    private TextTerminal terminal;
 }

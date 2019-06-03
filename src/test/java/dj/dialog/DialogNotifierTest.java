@@ -8,9 +8,9 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-class DialogManagerTest {
-    DialogManagerTest() {
-        unit = new DialogManager();
+class DialogNotifierTest {
+    DialogNotifierTest() {
+        unit = new DialogNotifier();
         dialogInstance = new DialogInstance(unit);
         spy1 = new DialogObserverSpy();
         spy2 = new DialogObserverSpy();
@@ -43,6 +43,6 @@ class DialogManagerTest {
 
     private DialogObserverSpy spy1;
     private DialogObserverSpy spy2;
-    private DialogManager unit;
+    private DialogNotifier unit;
     private DialogInstance dialogInstance;
 }

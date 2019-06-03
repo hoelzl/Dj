@@ -1,16 +1,26 @@
 package dj.dialog;
 
+import dj.core.ValuedItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class DialogManager {
+public class DialogNotifier {
 
-    public DialogManager() {
+    public DialogNotifier() {
         observers = new ArrayList<>();
     }
 
-    void register(DialogObserver observer) {
+    public void register(DialogObserver observer) {
         observers.add(observer);
+    }
+
+    void display(ValuedItem<String> item) {
+        if (item != null) {
+            for (var observer : observers) {
+                observer.onDisplay(item);
+            }
+        }
     }
 
     void proposeChoices(List<DialogChoice> choices) {

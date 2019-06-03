@@ -1,22 +1,25 @@
 package dj.dialog;
 
+import dj.core.Command;
+import dj.core.ValuedItem;
+
 import java.util.List;
 
 @SuppressWarnings("unused")
 public class DialogInstance implements DialogActivity {
-    public DialogInstance(DialogManager dialogManager) {
-        this.dialogManager = dialogManager;
+    public DialogInstance(DialogNotifier dialogNotifier) {
+        this.dialogNotifier = dialogNotifier;
     }
 
     public DialogInstance() {
     }
 
-    public DialogManager getDialogManager() {
-        return dialogManager;
+    public DialogNotifier getDialogNotifier() {
+        return dialogNotifier;
     }
 
-    public void setDialogManager(DialogManager dialogManager) {
-        this.dialogManager = dialogManager;
+    public void setDialogNotifier(DialogNotifier dialogNotifier) {
+        this.dialogNotifier = dialogNotifier;
     }
 
     public DialogText getInitialText() {
@@ -25,21 +28,32 @@ public class DialogInstance implements DialogActivity {
 
     public void setInitialText(DialogText initialText) {
         this.initialText = initialText;
+        this.activeDialogActivity = initialText;
     }
 
     @Override
     public void activate() {
-        initialText.activate();
+        activeDialogActivity.activate();
+    }
+
+    void display(ValuedItem<String> item) {
+        dialogNotifier.display(item);
     }
 
     void proposeChoices(List<DialogChoice> choices) {
-        dialogManager.proposeChoices(choices);
+        dialogNotifier.proposeChoices(choices);
     }
 
     void selectChoice(DialogChoice choice) {
-        dialogManager.selectChoice(choice);
+        dialogNotifier.selectChoice(choice);
     }
 
-    private DialogManager dialogManager;
+    @Override
+    public List<Command> provideCommands() {
+        return activeDialogActivity.provideCommands();
+    }
+
+    private DialogNotifier dialogNotifier;
     private DialogText initialText;
+    private DialogActivity activeDialogActivity;
 }

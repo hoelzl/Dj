@@ -40,7 +40,7 @@ class DialogInstanceTest {
         assertThat(dialogManager.selectedChoice, is(choice));
     }
 
-    private DialogManagerSpy dialogManager = new DialogManagerSpy();
+    private DialogNotifierSpy dialogManager = new DialogNotifierSpy();
     private DialogInstance unit = new DialogInstance(dialogManager);
     private DialogTextSpy initialText = new DialogTextSpy(unit, "start");
 }

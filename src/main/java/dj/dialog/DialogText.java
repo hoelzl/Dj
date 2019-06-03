@@ -1,8 +1,10 @@
 package dj.dialog;
 
 import dj.core.AbstractNode;
+import dj.core.Command;
 import dj.core.ValuedItem;
 
+import java.util.Collections;
 import java.util.List;
 
 public class DialogText extends AbstractNode<DialogText, DialogChoice>
@@ -55,6 +57,7 @@ public class DialogText extends AbstractNode<DialogText, DialogChoice>
 
     @Override
     public void activate() {
+        dialogInstance.display(this);
         dialogInstance.proposeChoices(getOutgoingEdges());
     }
 
@@ -66,6 +69,12 @@ public class DialogText extends AbstractNode<DialogText, DialogChoice>
     @Override
     public void setValue(String newValue) throws UnsupportedOperationException {
         value = newValue;
+    }
+
+    @Override
+    public List<Command> provideCommands() {
+        return Collections.singletonList(
+                new DisplayTextAndContinueCommand(this));
     }
 
     private DialogInstance dialogInstance;

@@ -64,7 +64,7 @@ class DialogTextTest {
         assertThat(unit.getValue(), is("new value"));
     }
 
-    private DialogManagerSpy dialogManager = new DialogManagerSpy();
+    private DialogNotifierSpy dialogManager = new DialogNotifierSpy();
     private DialogInstance dialogInstance = new DialogInstance(dialogManager);
 
 }

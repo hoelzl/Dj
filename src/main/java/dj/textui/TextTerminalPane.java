@@ -20,6 +20,12 @@ public class TextTerminalPane implements TerminalPane {
     }
 
     @Override
+    public void displayText(String text) {
+        terminal.print(text);
+        terminal.println();
+    }
+
+    @Override
     public int readInt(String prompt, int min, int max) {
         return inputReader.withMinVal(min).withMaxVal(max).read(prompt);
     }

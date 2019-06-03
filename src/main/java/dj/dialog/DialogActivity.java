@@ -1,5 +1,7 @@
 package dj.dialog;
 
-public interface DialogActivity {
+import dj.core.CommandProvider;
+
+public interface DialogActivity extends CommandProvider {
     void activate();
 }
