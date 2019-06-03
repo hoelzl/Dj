@@ -36,10 +36,10 @@ tasks.test {
 
 tasks.jar {
     manifest {
-        attributes["Main-Class"] = "dj.App"
+        attributes["Main-Class"] = "dj.app.App"
     }
 }
 
 application {
-    mainClassName = "dj.App"
+    mainClassName = "dj.app.App"
 }
