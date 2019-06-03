@@ -13,15 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class App {
-    public static void main(String[] args) {
-        App app = new App();
+    private TextTerminal terminal;
+    private CommandSelector cs = new CommandSelector();
+    private List<Command> commands = new ArrayList<>();
 
+    App() {
         TextIO textIO = TextIoFactory.getTextIO();
-        TextTerminal terminal = textIO.getTextTerminal();
+        terminal = textIO.getTextTerminal();
 
-        List<Command> commands = new ArrayList<>();
         commands.add(new Command() {
-
             @Override
             public void execute() {
                 terminal.printf("Executing first command");
@@ -31,9 +31,9 @@ public class App {
             public String describe() {
                 return "First command";
             }
+
         });
         commands.add(new Command() {
-
             @Override
             public void execute() {
                 terminal.printf("Executing second command");
@@ -44,12 +44,14 @@ public class App {
                 return "Second command";
             }
         });
-
-        CommandSelector cs = new CommandSelector();
         commands.add(cs.exitCommand);
+    }
+
+    public static void main(String[] args) {
+        App app = new App();
 
         //noinspection StatementWithEmptyBody
-        while (!cs.promptForAndExecuteSingleCommand(commands)) {
+        while (!app.cs.promptForAndExecuteSingleCommand(app.commands)) {
         }
         System.exit(0);
     }
