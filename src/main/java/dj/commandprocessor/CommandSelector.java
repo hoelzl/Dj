@@ -1,16 +1,14 @@
-package dj.textui;
+package dj.commandprocessor;
 
 import dj.core.Command;
-import org.beryx.textio.TextIO;
-import org.beryx.textio.TextIoFactory;
-import org.beryx.textio.TextTerminal;
+import dj.core.IOPane;
 
 import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 public class CommandSelector {
-    private TextIO textIO = TextIoFactory.getTextIO();
-    private boolean shouldExit = false;
+    private IOPane ioPane;
+
     public Command exitCommand = new Command() {
         @Override
         public void execute() {
@@ -22,27 +20,26 @@ public class CommandSelector {
             return "Exit";
         }
     };
+    private boolean shouldExit = false;
+
+    public CommandSelector(IOPane ioPane) {
+        this.ioPane = ioPane;
+    }
 
     public boolean promptForAndExecuteSingleCommand(List<Command> commands) {
-        TextTerminal terminal = textIO.getTextTerminal();
-        CommandSelector cs = new CommandSelector();
-        Command command = cs.promptForCommand(commands);
+        Command command = promptForCommand(commands);
         command.execute();
-        terminal.println();
+        ioPane.println();
 
         return shouldExit;
     }
 
     public Command promptForCommand(List<Command> commands) {
-        TextTerminal terminal = textIO.getTextTerminal();
         for (int i = 0; i < commands.size(); i++) {
             Command c = commands.get(i);
-            terminal.printf("%d: %s\n", i + 1, c.describe());
+            ioPane.println("%d: %s\n", i + 1, c.describe());
         }
-        int selectedCommand = textIO.newIntInputReader()
-                .withMinVal(1)
-                .withMaxVal(commands.size())
-                .read("Select a command:");
+        int selectedCommand = ioPane.readInt("Select a command:", 1, commands.size());
         return commands.get(selectedCommand - 1);
     }
 }

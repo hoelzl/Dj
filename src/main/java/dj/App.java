@@ -3,8 +3,9 @@
  */
 package dj;
 
+import dj.commandprocessor.CommandSelector;
 import dj.core.Command;
-import dj.textui.CommandSelector;
+import dj.textui.TextCommandSelector;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 import org.beryx.textio.TextTerminal;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class App {
     private TextTerminal terminal;
-    private CommandSelector cs = new CommandSelector();
+    private CommandSelector cs = new TextCommandSelector();
     private List<Command> commands = new ArrayList<>();
 
     App() {
