@@ -4,7 +4,7 @@ import java.util.List;
 
 class DialogManagerSpy extends DialogManager {
     List<DialogChoice> proposedChoices;
-    private DialogChoice selectedChoice;
+    DialogChoice selectedChoice;
 
     @Override
     void proposeChoices(List<DialogChoice> choices) {

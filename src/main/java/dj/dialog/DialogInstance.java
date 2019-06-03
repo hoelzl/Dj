@@ -7,11 +7,6 @@ public class DialogInstance implements DialogActivity {
     private DialogManager dialogManager;
     private DialogText initialText;
 
-    public DialogInstance(DialogManager dialogManager, DialogText initialText) {
-        this.dialogManager = dialogManager;
-        this.initialText = initialText;
-    }
-
     public DialogInstance(DialogManager dialogManager) {
         this.dialogManager = dialogManager;
     }
